@@ -1,2 +1,9 @@
-# testtask
- Test Task For Data Master Company
+В классе RefreshEventDataInitializing содержится первичная инициализация данных для проекта, база данных и сами данные инициализируются заново при каждом запуске проекта.
+
+Перед запуском необходимо в application.properties файлике настроить параметры соединения spring.jpа c postgre сервером и самостоятельно создать базу, т.к. автоматическое создание базы не поддерживается postgresql.
+
+Точка входа в приложение - localhost:8025, порт настраивается в application.properties параметр server.port.
+
+Swagger документация соотвественно - http://localhost:8025/swagger-ui.html
+
+В параметре spring.jackson.time-zone настраивается таймзона, в которую jackson будет переводить поля с датами в JSON
