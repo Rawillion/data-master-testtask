@@ -1,0 +1,49 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="Dmitriy" id="1">
+        <createSequence
+                sequenceName="poll_sequence"
+                minValue="1"
+                startValue="1"
+                incrementBy="1"
+                />
+    </changeSet>
+    <changeSet author="Dmitriy" id="2">
+        <createSequence
+                sequenceName="question_sequence"
+                minValue="1"
+                startValue="1"
+                incrementBy="1"
+                />
+    </changeSet>
+
+    <changeSet author="Dmitriy" id="3">
+        <createTable tableName="poll">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="poll_pkey"/>
+            </column>
+            <column name="name" type="varchar(255)"/>
+            <column name="begin_date" type="timestamp"/>
+            <column name="end_date" type="timestamp"/>
+            <column name="active" type="boolean"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Dmitriy" id="4">
+        <createTable tableName="question">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="question_pkey"/>
+            </column>
+            <column name="text" type="varchar(255)"/>
+            <column name="poll_id" type="bigint">
+                <constraints foreignKeyName="fk_question_poll" referencedTableName="poll" referencedColumnNames="id"/>
+            </column>
+            <column name="sort_order" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
