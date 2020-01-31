@@ -74,15 +74,15 @@ public class PollController
 			return ResponseEntity.notFound().build();
 	}
 
-	@ApiOperation(value = "Create Poll, put Poll Dto Model in Request Body for filling fields")
-	@RequestMapping(method = RequestMethod.POST, path = "/")
+	@ApiOperation(value = "Create Poll, put Poll Dto Model with nested Questions in Request Body for filling fields")
+	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<PollModel> createOne(@RequestBody PollModel pollModel)
 	{
 		return new ResponseEntity<>(pollModelAssembler.toResource(pollService.savePoll(pollModelAssembler.fromModel(pollModel))), HttpStatus.OK);
 	}
 
-	@ApiOperation(value = "Update Poll by ID, put Poll Dto Model in Request Body for updating fields")
+	@ApiOperation(value = "Update Poll by ID, put Poll Dto Model with nested Questions in Request Body for updating fields")
 	@RequestMapping(method = RequestMethod.PUT, path = "/{id}")
 	@ResponseBody
 	public ResponseEntity<PollModel> updateOne(@RequestBody PollModel pollModel, @PathVariable Long id)
@@ -120,7 +120,7 @@ public class PollController
 	}
 
 	@ApiOperation(value = "Get all sorted and paging Polls by parameters")
-	@RequestMapping(method = RequestMethod.GET, path = "/")
+	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<PagedResources<PollModel>> getAllPageable(@PageableDefault Pageable pageable, Sort sort,
 																	@RequestParam(value = "name", required = false) String name,
